@@ -45,13 +45,13 @@ class Assistant(QWidget):
         icon_grid.addItems(CATEGORIES)
         icon_grid.itemClicked.connect(self._on_item_clicked)
 
-        self.seach_field = QLineEdit("")
+        self.search_field = QLineEdit("")
         def text_changed(*args, **kwargs):
-            search_string = self.seach_field.text().lower()
+            search_string = self.search_field.text().lower()
             icon_grid.clear()
             icon_grid.addItems(filter_categories(search_string))
 
-        self.seach_field.textChanged.connect(text_changed)
+        self.search_field.textChanged.connect(text_changed)
         text_changed()
 
         # create menu
@@ -96,7 +96,7 @@ class Assistant(QWidget):
             '</html>'
         )
         help.setMaximumWidth(20)
-        search_and_help.layout().addWidget(self.seach_field)
+        search_and_help.layout().addWidget(self.search_field)
         search_and_help.layout().addWidget(help)
 
         self.layout().addWidget(search_and_help)
@@ -180,7 +180,7 @@ class Assistant(QWidget):
             return False
 
         # make a new widget
-        gui = make_gui_for_category(category, self.seach_field.text(), self._viewer, button_size=self.button_size_spin_box.value())
+        gui = make_gui_for_category(category, self.search_field.text(), self._viewer, button_size=self.button_size_spin_box.value())
         # prevent auto-call when adding to the viewer, to avoid double calls
         # do this here rather than widget creation for the sake of
         # non-Assistant-based widgets.
@@ -198,6 +198,9 @@ class Assistant(QWidget):
         # turn on auto_call, and make sure that if the input changes we update
         gui._auto_call = True
         self._connect_to_all_layers()
+
+        # TODO decide if keep: added this for testing purposes
+        return gui
 
     def _refesh_data(self, event):
         self._refresh(event.source)

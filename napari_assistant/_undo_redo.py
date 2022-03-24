@@ -46,13 +46,13 @@ def undo(viewer: Viewer):
     if controller.undo_stack:
 
         # undo workflow step: workflow is now the undone workflow
-        controller.undo()
+        old_workflow = controller.undo()
 
-        controller.freeze = True # no actions recorded or performed on workflow
+        controller.freeze_stacks = True
         delete_workflow_widgets_layers(viewer)
-        
-        initialise_root_functions(workflow=workflow,
+        workflow.clear()
+        initialise_root_functions(workflow=old_workflow,
                                   viewer=viewer)
-        load_remaining_workflow(workflow=workflow,
+        load_remaining_workflow(workflow=old_workflow,
                                 viewer=viewer)
-        controller.freeze = False
+        controller.freeze_stacks = False

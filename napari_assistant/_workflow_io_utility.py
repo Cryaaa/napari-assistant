@@ -210,8 +210,7 @@ def make_flexible_gui(func, viewer, wf_step_name, autocall = True):
         target_layer = None
 
         if sig.return_annotation in [ImageData, "napari.types.ImageData", LabelsData, "napari.types.LabelsData"]:
-            op_name = name
-            new_name = f"Result of {op_name}"
+            new_name = f"Result of {name}"
 
             # we now search for a layer that has -this- magicgui attached to it
             try:

@@ -79,6 +79,8 @@ def call_op(op_name: str, inputs: Sequence[Layer], timepoint : int = None, viewe
     np.ndarray
         result image
     """
+    
+    print(f'call op kwargs: {kwargs}')
 
     if not inputs or inputs[0] is None:
         return

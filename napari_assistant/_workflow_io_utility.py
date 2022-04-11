@@ -231,6 +231,8 @@ def make_flexible_gui(func, viewer, wf_step_name, autocall = True):
         if target_layer is not None:
             # update the workflow manager in case it's installed
             workflow_manager = WorkflowManager.install(viewer)
+            print(f'  loading args: {iargs}')
+            print(f'loading kwargs: {ikwargs}')
             workflow_manager.update(target_layer, func, *iargs, **ikwargs) 
 
             return None

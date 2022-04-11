@@ -366,6 +366,7 @@ def make_gui_for_category(category: Category, search_string:str = None, viewer: 
             # notify workflow manage that something was created / updated
             try:
                 from napari_workflows import WorkflowManager
+                print(f'args sent to workflow manager from category widget: {used_args}')
                 manager = WorkflowManager.install(viewer)
                 manager.update(result_layer, find_function(op_name), *used_args)
                 #print("notified", result_layer.name, find_function(op_name))
